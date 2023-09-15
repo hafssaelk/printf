@@ -10,4 +10,10 @@ typedef struct _format
 int _printf(const char *, ...);
 int _putchar(char);
 
+
+int print_string(va_list);
+int print_char(va_list);
+
+int handler(const char *, va_list);
+
 #endif /* MAIN_H */
