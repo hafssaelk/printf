@@ -3,41 +3,39 @@
 
 int print_pointer(va_list list)
 {
-    char *p_buff;
-    int size = 0;
+    char *var;
+    int count = 0, i;
+    char *str;
 
-    p_buff = itoa(va_arg(list, unsigned long int), 16);
+    var = itoa(va_arg(list, unsigned long int), 16);
 
-    if (p_buff == NULL)
+    if (var == NULL)
         return (-1);
 
-    if (_strcmp(p_buff, "0") == 0)
+    if (strcmp(var, "0") == 0)
     {
-        size += print("(nil)");
+        str = "(nil)";
+        for (i = 0; str[i] != '\0'; ++i)
+		{
+            _putchar(str[i]);
+            count++;
+        }
+        return (count);
     }
     else
     {
-        size += print("0x");
-        size += print(p_buff);
+        str = "0x";
+        for (i = 0; str[i] != '\0'; ++i)
+		{
+            _putchar(str[i]);
+            count++;
+        }
+        for (i = 0; var[i] != '\0'; ++i)
+		{
+            _putchar(var[i]);
+            count++;
+        }
     }
 
-    return (size);
-}
-
-int _strcmp(char *s1, char *s2)
-{
-    int i;
-
-    for (i = 0; s1[i] != '\0' && s2[i] != '\0'; i++)
-    {
-        if (s1[i] != s2[i])
-            return (s1[i] - s2[i]);
-    }
-
-    if (s1[i] == '\0' && s2[i] == '\0')
-        return 0;
-    else if (s1[i] != '\0')
-        return s1[i];
-    else
-        return -s2[i];
+    return (count);
 }
