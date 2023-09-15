@@ -1,35 +1,23 @@
 #include "main.h"
 
-int is_lowercase(char);
-char *string_to_upper(char *);
+/**
+ * print_hexadecimal_low - Print a number in base 16
+ * @list: Number to print in base 16
+ *
+ * Return: Length of th numbers in decimal...
+ **/
 int print_hexadecimal_upp(va_list list)
-
-
 {
-    char *p_buff;
-    int size = 0;
-    int i = 0;
+	char *var, *upper_var;
+	int count = 0, i;
 
-    p_buff = itoa(va_arg(list, unsigned int), 16);
-    p_buff = string_to_upper(p_buff);
+	var = itoa(va_arg(list, unsigned int), 16);
+	upper_var = low_to_up(var);
 
-    if (p_buff != NULL)
-    {
-        while (p_buff[i] != '\0')
-        {
-            _putchar(p_buff[i]);
-            size++;
-            i++;
-        }
-    }
-    else
-    {
-        _putchar('N');
-        _putchar('U');
-        _putchar('L');
-        _putchar('L');
-        size += 4;
-    }
-
-    return (size);
+	for (i = 0; upper_var[i] != '\0'; ++i)
+	{
+		_putchar(upper_var[i]);
+		count ++;
+	}
+	return (count);
 }
