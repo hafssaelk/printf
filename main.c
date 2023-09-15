@@ -12,9 +12,11 @@ int main(void)
 	int len;
     int len2;
     unsigned int ui;
+	void *addr;
 
     len = _printf("Let's try to printf a simple sentence.\n");
     len2 = printf("Let's try to printf a simple sentence.\n");
+	addr = (void *)0x7ffe637541f0;
     ui = (unsigned int)INT_MAX + 1024;
     _printf("Length:[%d, %i]\n", len, len);
     printf("Length:[%d, %i]\n", len2, len2);
@@ -32,6 +34,8 @@ int main(void)
     printf("String:[%s]\n", "I am a string !");
 	len = _printf("Percent:[%%]\n");
     len2 = printf("Percent:[%%]\n");
+	_printf("Address:[%p]\n", addr);
+    printf("Address:[%p]\n", addr);
 
 	return (0);
 }
