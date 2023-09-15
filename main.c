@@ -36,6 +36,7 @@ int main(void)
     len2 = printf("Percent:[%%]\n");
 	_printf("Address:[%p]\n", addr);
     printf("Address:[%p]\n", addr);
-
+    _printf("Len:[%d]\n", len);
+    printf("Len:[%d]\n", len2);
 	return (0);
 }
