@@ -1,4 +1,5 @@
 #include "main.h"
+#include <string.h>
 int _printf(const char *format, ...)
 {
     int size;
@@ -7,14 +8,12 @@ int _printf(const char *format, ...)
     if (format == NULL)
         return (-1);
 
-    size = _strlen(format);
+    size = strlen(format);
     if (size <= 0)
         return (0);
 
     va_start(args, format);
-    size = handler(format, args, 0)
-
-    _putchar(-1);
+    size = handler(format, args);
     va_end(args);
 
     return (size);

@@ -12,7 +12,7 @@ int print_string(va_list list)
 	int var, count = 1;
 
 	var = va_arg(list, int);
-	while (var != NULL)
+	while (var != 0)
 	{
 		_putchar(var);
 		var = va_arg(list, int);
