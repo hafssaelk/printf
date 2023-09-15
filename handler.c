@@ -1,56 +1,65 @@
-#include <stdio.h>
-#include <stdarg.h>
-
-int _putchar(char c);
-
-
-int handler(const char *format, va_list args)
+#include "main.h"
+int handler(const char *str, va_list list)
 {
-    int count = 0;  
+    int size = 0;
+    int i = 0;  // Initialize i here
 
-    while (*format)
+    while (str[i] != '\0')  // Change to a while loop
     {
-        if (*format == '%')
+        if (str[i] == '%')
         {
-            format++;  
-            switch (*format)
-            {
-                case 'c':
-                    
-                    _putchar(va_arg(args, int));
-                    count++;
-                    break;
-                case 's':
-                    
-                    {
-                        const char *str = va_arg(args, const char *);
-                        while (*str)
-                        {
-                            _putchar(*str);
-                            str++;
-                            count++;
-                        }
-                    }
-                    break;
-                case '%':
-                    
-                    _putchar('%');
-                    count++;
-                    break;
-                default:
-                    
-                    break;
-            }
+            int aux = percent_handler(str, list, &i);
+            if (aux == -1)
+                return (-1);
+
+            size += aux;
         }
         else
         {
-            
-            _putchar(*format);
-            count++;
+            _putchar(str[i]);
+            size++;
         }
-        format++;  
+
+        i++;  // Increment i here
     }
 
-    return count;
+    return (size);
 }
+int percent_handler(const char *str, va_list list, int *i)
+{
+    int size = 0;
+    int j, number_formats;
+    format formats[] = {
+        {'s', print_string}, {'c', print_char},
+        {'d', print_integer}, {'i', print_integer},
+        {'b', print_binary}, {'u', print_unsigned},
+        {'o', print_octal}, {'x', print_hexadecimal_low},
+        {'X', print_hexadecimal_upp}, {'p', print_pointer},
+        {'r', print_rev_string}, {'R', print_rot}
+    };
 
+    (*i)++;  // Increment i through pointer
+
+    if (str[*i] == '\0')
+        return (-1);
+
+    if (str[*i] == '%')
+    {
+        _putchar('%');
+        return (1);
+    }
+
+    number_formats = sizeof(formats) / sizeof(formats[0]);
+    for (j = 0; j < number_formats; j++)
+    {
+        if (str[*i] == formats[j].type)
+        {
+            size = formats[j].f(list);
+            return (size);
+        }
+    }
+
+    _putchar('%');
+    _putchar(str[*i]);
+    return (2);
+}
