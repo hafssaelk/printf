@@ -17,7 +17,7 @@ format formats[] = {
 {'d', print_integer}, {'i', print_integer},
 {'u', print_unsigned}, {'b', print_binary},
 {'o', print_octal}, {'x', print_hexadecimal_low},
-{'X', print_hexadecimal_upp}
+{'X', print_hexadecimal_upp}, {'p', print_pointer}
 };
 
 *i = *i + 1;  /* Increment i through pointer */
