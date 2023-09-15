@@ -9,9 +9,9 @@
  */
 int main(void)
 {
-	char name = '.';
+	char* name = "Mohamed";
     _printf("Let's try to printf a simple sentence.\n");
     _printf("hello\n");
-	_printf("hello my name is %c\n", name);
+	_printf("hello my name is %s\n", name);
 	return (0);
 }
