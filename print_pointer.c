@@ -1,31 +1,45 @@
 #include "main.h"
-
+#include <stdio.h>
 /**
  * print_pointer - prints an hexadecimal number.
- * @val: arguments.
+ * @list: arguments.
  * Return: counter.
  */
-int print_pointer(va_list val)
+int print_pointer(va_list list)
 {
-	void *p;
-	char *s = "(nil)";
-	long int a;
-	int b;
-	int i;
+char *var;
+int count = 0, i;
+char *str;
 
-	p = va_arg(val, void*);
-	if (p == NULL)
-	{
-		for (i = 0; s[i] != '\0'; i++)
-		{
-			_putchar(s[i]);
-		}
-		return (i);
-	}
+var = itoa(va_arg(list, unsigned long int), 16);
 
-	a = (unsigned long int)p;
-	_putchar('0');
-	_putchar('x');
-	b = printf_hex_aux(a);
-	return (b + 2);
+if (var == NULL)
+return (-1);
+
+if (strcmp(var, "0") == 0)
+{
+str = "(nil)";
+for (i = 0; str[i] != '\0'; ++i)
+{
+_putchar(str[i]);
+count++;
+}
+return (count);
+}
+else
+{
+str = "0x";
+for (i = 0; str[i] != '\0'; ++i)
+{
+_putchar(str[i]);
+count++;
+}
+for (i = 0; var[i] != '\0'; ++i)
+{
+_putchar(var[i]);
+count++;
+}
+}
+
+return (count);
 }
