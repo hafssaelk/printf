@@ -15,7 +15,7 @@ int print_string(va_list list)
 	var = va_arg(list, char*);
 	if (var == NULL)
 	{
-		var = "NULL";
+		var = "(null)";
 	}
 	for (i = 0; var[i] != '\0'; ++i)
 	{

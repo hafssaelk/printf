@@ -1,47 +1,109 @@
-#include <stdio.h>
 #include "main.h"
+#include <stdio.h>
+#include <limits.h>
 
 int main()
 {
-	int len_1, len_2;
+	int len_1 = 0, len_2 = 0;
 
-	/* ===========> %d <=========== */
-	/*Test case for positive integer with precision less than the number of digits*/
-	len_1 = printf("Expected output: %.3d\n", 123);
-	len_2 = _printf("Current output: %.3d\n", 123);
-	printf("Expected length: [%d]\n", len_1);
-	printf("Current length: [%d]\n", len_2);
+	/* ===========> %c <=========== */
+	printf("----------------------\n");
+	printf("----> CHAR CASES <----\n");
+	printf("----------------------\n");
+	len_1 = printf("Expected output:    %c\n", 53);
+	len_2 = _printf("Current output:     %c\n", 53);
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+	len_1 = printf("Expected output:    %cc\n", 'a');
+	len_2 = _printf("Current output:     %cc\n", 'a');
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+	len_1 = printf("Expected output:    %cAAA\n", 'a');
+	len_2 = _printf("Current output:     %cAAA\n", 'a');
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+	len_1 = printf("Expected output:    %yd\n");
+	len_2 = _printf("Current output:     %yd\n");
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+	len_1 = printf("Expected output:    %c\n", '\0');
+	len_2 = _printf("Current output:     %c\n", '\0');
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+	len_1 = printf("Expected output:    %%%c\n", 'y');
+	len_2 = _printf("Current output:     %%%c\n", 'y');
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
 
-	/*Test case for positive integer with precision greater than the number of digits*/
-	len_1 = printf("Expected output: %.10d\n", 123);
-	len_2 = _printf("Current output: %.10d\n", 123);
-	printf("Expected length: [%d]\n", len_1);
-	printf("Current length: [%d]\n", len_2);
+	/* ===========> %s <=========== */
+	printf("----------------------\n");
+	printf("---> STRING CASES <---\n");
+	printf("----------------------\n");
+	len_1 = printf("Expected output:    %s\n", "Morocco");
+	len_2 = _printf("Current output:     %s\n", "Morocco");
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+	len_1 = printf("Expected output:    %s$\n", "");
+	len_2 = _printf("Current output:     %s$\n", "");
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+	len_1 = printf("Expected output:    %s$\n", NULL);
+	len_2 = _printf("Current output:     %s$\n", NULL);
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+	len_1 = printf("Expected output:    %s\n", "hello, world");
+	len_2 = _printf("Current output:     %s\n", "hello, world");
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+	len_1 = printf("Expected output:    %sForLife\n", "Morocco");
+	len_2 = _printf("Current output:     %sForLife\n", "Morocco");
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
 
-	/*Test case for negative integer with precision less than the number of digits:*/
-	len_1 = printf("Expected output: %.3d\n", -123);
-	len_2 = _printf("Current output: %.3d\n", -123);
-	printf("Expected length: [%d]\n", len_1);
-	printf("Current length: [%d]\n", len_2);
-
-	/*Test case for negative integer with precision greater than the number of digits:*/
-	len_1 = printf("Expected output: %.10d\n", -123);
-	len_2 = _printf("Current output: %.10d\n", -123);
-	printf("Expected length: [%d]\n", len_1);
-	printf("Current length: [%d]\n", len_2);
-
-	/* ===========> %x <=========== */
-	/*Test case for hexadecimal with precision less than the number of digits:*/
-	len_1 = printf("Expected output: %.3x\n", 0xabc);
-	len_2 = _printf("Current output: %.3x\n", 0xabc);
-	printf("Expected length: [%d]\n", len_1);
-	printf("Current length: [%d]\n", len_2);
-
-	/*Test case for hexadecimal with precision greater than the number of digits:*/
-	len_1 = printf("Expected output: %.10x\n", 0xabc);
-	len_2 = _printf("Current output: %.10x\n", 0xabc);
-	printf("Expected length: [%d]\n", len_1);
-	printf("Current length: [%d]\n", len_2);
+	/* ===========> % <=========== */
+	printf("----------------------\n");
+	printf("-> PERCENTAGE CASES <-\n");
+	printf("----------------------\n");
+	len_1 = printf("Expected output:    %%\n");
+	len_2 = _printf("Current output:     %%\n");
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+	len_1 = printf("Expected output:    %%%%%%\n");
+	len_2 = _printf("Current output:     %%%%%%\n");
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+	printf("Expected output:    ");
+	len_1 = printf("%");
+	printf("\n");
+	printf("Current output:     ");
+	len_2 = _printf("%");
+	printf("\n");
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+	printf("Expected output:    ");
+	len_1 = printf("%   ");
+	printf("\n");
+	printf("Current output:     ");
+	len_2 = _printf("%   ");
+	printf("\n");
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+	printf("Expected output:    ");
+	len_1 = printf("test%");
+	printf("\n");
+	printf("Current output:     ");
+	len_2 = _printf("test%");
+	printf("\n");
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
+	printf("Expected output:    ");
+	len_1 = printf("%  s", "valid format");
+	printf("\n");
+	printf("Current output:     ");
+	len_2 = _printf("%  s", "valid format");
+	printf("\n");
+	printf("Expected length:    [%d]\n", len_1);
+	printf("Current length:     [%d]\n", len_2);
 
 	return (0);
 }

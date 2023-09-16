@@ -33,7 +33,11 @@ int percent_handler(const char *str, va_list list, int *i)
 		_putchar('%');
 		return (1);
 	}
-	for (j = 0; j < number_formats; j++)
+	while (str[*i] == ' ')
+	{
+		*i = *i + 1;
+	}
+		for (j = 0; j < number_formats; j++)
 		{
 			if (str[*i] == formats[j].datatype)
 			{
@@ -58,7 +62,7 @@ int handler(const char *str, va_list list)
 int size = 0, var;
 int i = 0;  /* Initialize i here */
 
-while (str[i] != '\0')  /* Change to a while loop */
+	while (str[i] != '\0')  /* Change to a while loop */
 	{
 		if (str[i] == '%' && list != NULL)
 		{
