@@ -59,7 +59,7 @@ int i = 0;  /* Initialize i here */
 
 while (str[i] != '\0')  /* Change to a while loop */
 	{
-		if (str[i] == '%')
+		if (str[i] == '%' && list != NULL)
 		{
 			var = percent_handler(str, list, &i);
 			if (var == -1)
