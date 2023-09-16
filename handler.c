@@ -17,11 +17,22 @@ int percent_handler(const char *str, va_list list, int *i)
 		{'d', print_integer}, {'i', print_integer},
 		{'u', print_unsigned}, {'b', print_binary},
 		{'o', print_octal}, {'x', print_hexadecimal_low},
-		{'X', print_hexadecimal_upp}, {'p', print_pointer}
+		{'X', print_hexadecimal_upp}, {'p', print_pointer},
+		{'r', print_rev_string}
 	};
 
 	*i = *i + 1;  /* Increment i through pointer */
 	number_formats = sizeof(formats) / sizeof(formats[0]);
+	if (str[*i] == '\0')
+	{
+		return (-1);
+	}
+
+	if (str[*i] == '%')
+	{
+		_putchar('%');
+		return (1);
+	}
 	for (j = 0; j < number_formats; j++)
 		{
 			if (str[*i] == formats[j].datatype)
@@ -30,17 +41,7 @@ int percent_handler(const char *str, va_list list, int *i)
 				return (size);
 			}
 		}
-	if (str[*i] == '\0')
-	{
-		_putchar('%');
-		return (0);
-	}
-
-	if (str[*i] == '%')
-	{
-		_putchar('%');
-		return (1);
-	}
+	_putchar('%');
 	_putchar(str[*i]);
 	return (2);
 }

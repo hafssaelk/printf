@@ -1,6 +1,6 @@
 #include "main.h"
 #include <string.h>
-int _printf(const char *format, ...)
+int _printf(const char * const format, ...)
 {
     int size;
     va_list args;
@@ -11,12 +11,10 @@ int _printf(const char *format, ...)
     size = strlen(format);
     if (size <= 0)
         return (0);
-    if (args != NULL)
-    {
-        va_start(args, format);
-        size = handler(format, args);
-        va_end(args);
-    }
+
+    va_start(args, format);
+    size = handler(format, args);
+    va_end(args);
 
     return (size);
 }

@@ -27,6 +27,7 @@ int print_octal(va_list);
 int print_hexadecimal_upp(va_list);
 int print_hexadecimal_low(va_list);
 int print_pointer(va_list);
+int print_rev_string(va_list);
 
 int handler(const char *, va_list);
 
