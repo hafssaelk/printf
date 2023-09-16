@@ -1,6 +1,12 @@
 #include "main.h"
 #include <stdio.h>
 
+/**
+ * printf_pointer - prints an hexadecimal number.
+ * @list: arguments.
+ * Return: counter.
+ */
+
 int print_pointer(va_list list)
 {
     char *var;
