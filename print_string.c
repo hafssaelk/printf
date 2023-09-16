@@ -13,6 +13,10 @@ int print_string(va_list list)
 	int count = 0, i;
 
 	var = va_arg(list, char*);
+	if (var == NULL)
+	{
+		var = "NULL";
+	}
 	for (i = 0; var[i] != '\0'; ++i)
 	{
 		_putchar(var[i]);
