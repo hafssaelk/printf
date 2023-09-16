@@ -6,7 +6,7 @@ int print_rev_string(va_list list)
 
     str = va_arg(list, const char *);
 
-    size = _strlen(str);
+    size = strlen(str);
 
     for (i = size; i > 0; i--)
         _putchar(str[i - 1]);

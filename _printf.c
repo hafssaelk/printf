@@ -11,10 +11,12 @@ int _printf(const char *format, ...)
     size = strlen(format);
     if (size <= 0)
         return (0);
-
-    va_start(args, format);
-    size = handler(format, args);
-    va_end(args);
+    if (args != NULL)
+    {
+        va_start(args, format);
+        size = handler(format, args);
+        va_end(args);
+    }
 
     return (size);
 }

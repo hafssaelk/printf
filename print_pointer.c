@@ -38,5 +38,4 @@ int print_pointer(va_list list)
     }
 
      return (count);
-} 
-
+}
