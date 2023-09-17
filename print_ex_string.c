@@ -5,13 +5,13 @@
  * Return: the length of the string.
  */
 
-int printf_ex_string(va_list val)
+int printf_ex_string(va_list list)
 {
 	char *var;
 	int i, count = 0;
 	int cast;
 
-	var = va_arg(val, char *);
+	var = va_arg(list, char *);
 	if (var == NULL)
 		var = "(null)";
 	for (i = 0; var[i] != '\0'; i++)
@@ -27,7 +27,7 @@ int printf_ex_string(va_list val)
 				_putchar('0');
 				count++;
 			}
-			count = count + printf_HEX_aux(cast);
+			count = count + print_hexadecimal_low(list);
 		}
 		else
 		{
@@ -35,5 +35,5 @@ int printf_ex_string(va_list val)
 			count;
 		}
 	}
-	return (len);
+	return (count);
 }
