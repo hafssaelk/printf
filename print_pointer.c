@@ -34,7 +34,11 @@ int print_pointer(va_list list)
 		_putchar(str[i]);
 		count++;
 		}
-		count += print_hexadecimal_low(list)
+		for (i = 0; var[i] != '\0'; ++i)
+		{
+		_putchar(var[i]);
+		count++;
+		}
 	}
 	return (count);
 }
