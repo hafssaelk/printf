@@ -18,7 +18,7 @@ int percent_handler(const char *str, va_list list, int *i)
 		{'u', print_unsigned}, {'b', print_binary},
 		{'o', print_octal}, {'x', print_hexadecimal_low},
 		{'X', print_hexadecimal_upp}, {'p', print_pointer},
-		{'r', print_rev_string}, {'R', print_rot}
+		{'r', print_rev_string}, {'R', print_rot}, {"%S", printf_ex_string}
 	};
 
 	*i = *i + 1;  /* Increment i through pointer */
@@ -32,6 +32,10 @@ int percent_handler(const char *str, va_list list, int *i)
 	{
 		_putchar('%');
 		return (1);
+	}
+	while (str[*i] == ' ')
+	{
+		*i = *i + 1;
 	}
 	for (j = 0; j < number_formats; j++)
 	{
@@ -60,7 +64,7 @@ int i = 0;  /* Initialize i here */
 
 	while (str[i] != '\0')  /* Change to a while loop */
 	{
-		if (str[i] == '%' && list != NULL)
+		if (str[i] == '%')
 		{
 			var = percent_handler(str, list, &i);
 			if (var == -1)
