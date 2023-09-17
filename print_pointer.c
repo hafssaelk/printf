@@ -11,7 +11,7 @@ int print_pointer(va_list list)
 	int count = 0, i;
 	char *str;
 
-	var = va_arg(list, unsigned long int);
+	var = itoa(va_arg(list, unsigned long int), 16);
 
 	if (var == NULL)
 		return (-1);
@@ -34,7 +34,7 @@ int print_pointer(va_list list)
 		_putchar(str[i]);
 		count++;
 		}
-		count += print_hexadecimal_low(var);
+		count += print_hexadecimal_low(list)
 	}
 	return (count);
 }
