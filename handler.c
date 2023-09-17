@@ -33,18 +33,14 @@ int percent_handler(const char *str, va_list list, int *i)
 		_putchar('%');
 		return (1);
 	}
-	while (str[*i] == ' ')
+	for (j = 0; j < number_formats; j++)
 	{
-		*i = *i + 1;
-	}
-		for (j = 0; j < number_formats; j++)
+		if (str[*i] == formats[j].datatype)
 		{
-			if (str[*i] == formats[j].datatype)
-			{
-				size = formats[j].f(list);
-				return (size);
-			}
+			size = formats[j].f(list);
+			return (size);
 		}
+	}
 	_putchar('%');
 	_putchar(str[*i]);
 	return (2);
