@@ -27,7 +27,7 @@ int printf_ex_string(va_list list)
 				_putchar('0');
 				count++;
 			}
-			count = count + itoa(cast, 16)
+			count = count + itoa(cast, 16);
 		}
 		else
 		{
