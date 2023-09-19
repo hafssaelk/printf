@@ -13,15 +13,13 @@ int _printf(const char *format, ...) {
             count++;
         } else {
             format++; // Move past '%'
-            if (*format == '\0') {
-                break; // Ignore a lone '%' at the end of the format string
-            } else if (*format == 'c') {
-                // Handle character argument
+
+            // Handle valid conversion specifiers: 'c', 's', and '%'
+            if (*format == 'c') {
                 char c = va_arg(args, int);
                 putchar(c);
                 count++;
             } else if (*format == 's') {
-                // Handle string argument
                 const char *str = va_arg(args, const char *);
                 while (*str) {
                     putchar(*str);
@@ -29,7 +27,6 @@ int _printf(const char *format, ...) {
                     count++;
                 }
             } else if (*format == '%') {
-                // Handle '%%' to print a literal '%'
                 putchar('%');
                 count++;
             } else {
