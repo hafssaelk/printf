@@ -14,24 +14,20 @@ int _printf(const char *format, ...) {
         } else {
             format++; // Move past '%'
 
-            // Handle valid conversion specifiers: 'c', 's', and '%'
-            if (*format == 'c') {
-                char c = va_arg(args, int);
-                putchar(c);
-                count++;
-            } else if (*format == 's') {
+            if (*format == 'S') {
                 const char *str = va_arg(args, const char *);
                 while (*str) {
-                    putchar(*str);
+                    if (*str >= 32 && *str < 127) {
+                        putchar(*str);
+                        count++;
+                    } else {
+                        printf("\\x%02X", (unsigned char)*str);
+                        count += 4;
+                    }
                     str++;
-                    count++;
                 }
-            } else if (*format == '%') {
-                putchar('%');
-                count++;
             } else {
-                // Invalid format specifier, treat '%' followed by any other character as is
-                putchar('%');
+                putchar('%'); // Print '%' and the invalid specifier as is
                 putchar(*format);
                 count += 2;
             }
@@ -44,14 +40,7 @@ int _printf(const char *format, ...) {
 }
 
 int main(void) {
-    int num = 42;
-    char ch = 'A';
-
-    int printed_chars = _printf("Hello, %s! The answer is %d%%.\n", "world", num);
-    printf("\nTotal characters printed: %d\n", printed_chars);
-
-    printed_chars = _printf("A single character: %c\n", ch);
-    printf("\nTotal characters printed: %d\n", printed_chars);
+    _printf("%S\n", "Best\nSchool");
 
     return 0;
 }
