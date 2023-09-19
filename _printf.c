@@ -6,7 +6,7 @@ int _printf(const char *format, ...);
 int main() {
     int num = 42;
     char ch = 'A';
-    char *str = "Hello, World!";
+    char str[] = "Hello, World!";
 
     int result = _printf("This is a number: %d\nThis is a character: %c\nThis is a string: %s\n", num, ch, str);
 
