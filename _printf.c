@@ -1,47 +1,30 @@
-#include <stdio.h>
-#include <stdarg.h>
+#include "main.h"
+#include <string.h>
 
-int _printf(const char *format, ...) {
-    va_list args;
-    va_start(args, format);
+/**
+ * _printf - Produces output according to a format...
+ * @format: Is a character string. The format string...
+ * is composed of zero or more directives
+ *
+ * Return: The number of characters printed (excluding
+ * the null byte used to end output to strings)
+ **/
 
-    int count = 0; // To keep track of the number of characters printed
+int _printf(const char * const format, ...)
+{
+	int size;
+	va_list args;
 
-    while (*format) {
-        if (*format != '%') {
-            putchar(*format);
-            count++;
-        } else {
-            format++; // Move past '%'
+	if (format == NULL)
+		return (-1);
 
-            if (*format == 'S') {
-                const char *str = va_arg(args, const char *);
-                while (*str) {
-                    if (*str >= 32 && *str < 127) {
-                        putchar(*str);
-                        count++;
-                    } else {
-                        printf("\\x%02X", (unsigned char)*str);
-                        count += 4;
-                    }
-                    str++;
-                }
-            } else {
-                putchar('%'); // Print '%' and the invalid specifier as is
-                putchar(*format);
-                count += 2;
-            }
-        }
-        format++;
-    }
+	size = strlen(format);
+	if (size <= 0)
+		return (0);
 
-    va_end(args);
-    return count;
+	va_start(args, format);
+	size = handler(format, args);
+	va_end(args);
+
+	return (size);
 }
-
-int main(void) {
-    _printf("%S\n", "Best\nSchool");
-
-    return 0;
-}
-
