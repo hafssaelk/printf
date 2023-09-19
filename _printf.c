@@ -13,34 +13,28 @@ int _printf(const char *format, ...) {
             count++;
         } else {
             format++; // Move past '%'
-            switch (*format) {
-                case 'c':
-                    // Handle character argument
-                    putchar(va_arg(args, int));
+            if (*format == 'c') {
+                // Handle character argument
+                char c = va_arg(args, int);
+                putchar(c);
+                count++;
+            } else if (*format == 's') {
+                // Handle string argument
+                const char *str = va_arg(args, const char *);
+                while (*str != '\0') {
+                    putchar(*str);
+                    str++;
                     count++;
-                    break;
-                case 's':
-                    // Handle string argument
-                    {
-                        const char *str = va_arg(args, const char *);
-                        while (*str != '\0') {
-                            putchar(*str);
-                            str++;
-                            count++;
-                        }
-                    }
-                    break;
-                case '%':
-                    // Handle '%' character
-                    putchar('%');
-                    count++;
-                    break;
-                default:
-                    // Invalid format specifier
-                    putchar('%');
-                    putchar(*format);
-                    count += 2;
-                    break;
+                }
+            } else if (*format == '%') {
+                // Handle '%' character
+                putchar('%');
+                count++;
+            } else {
+                // Invalid format specifier, treat '%' followed by any other character as is
+                putchar('%');
+                putchar(*format);
+                count += 2;
             }
         }
         format++;
@@ -59,3 +53,4 @@ int main(void) {
 
     return 0;
 }
+
