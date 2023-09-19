@@ -1,31 +1,61 @@
-#include "main.h"
-#include <string.h>
+#include <stdio.h>
+#include <stdarg.h>
 
-/**
- * _printf - Produces output according to a format...
- * @format: Is a character string. The format string...
- * is composed of zero or more directives
- *
- * Return: The number of characters printed (excluding
- * the null byte used to end output to strings)
- **/
+int _printf(const char *format, ...) {
+    va_list args;
+    va_start(args, format);
 
-int _printf(const char * const format, ...)
-{
-	int size;
-	va_list args;
+    int count = 0; // To keep track of the number of characters printed
 
-	if (format == NULL)
-		return (-1);
+    while (*format != '\0') {
+        if (*format != '%') {
+            putchar(*format);
+            count++;
+        } else {
+            format++; // Move past '%'
+            switch (*format) {
+                case 'c':
+                    // Handle character argument
+                    putchar(va_arg(args, int));
+                    count++;
+                    break;
+                case 's':
+                    // Handle string argument
+                    {
+                        const char *str = va_arg(args, const char *);
+                        while (*str != '\0') {
+                            putchar(*str);
+                            str++;
+                            count++;
+                        }
+                    }
+                    break;
+                case '%':
+                    // Handle '%' character
+                    putchar('%');
+                    count++;
+                    break;
+                default:
+                    // Invalid format specifier
+                    putchar('%');
+                    putchar(*format);
+                    count += 2;
+                    break;
+            }
+        }
+        format++;
+    }
 
-	size = strlen(format);
-	if (size <= 0)
-		return (0);
+    va_end(args);
+    return count;
+}
 
-	va_start(args, format);
-	size = handler(format, args);
-	va_end(args);
+int main(void) {
+    int num = 42;
+    char ch = 'A';
 
-	return (size);
+    _printf("Hello, %s! The answer is %d%%.\n", "world", num);
+    _printf("A single character: %c\n", ch);
 
+    return 0;
 }
