@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdarg.h>
 
 void custom_printf(const char* format, ...) {
     va_list args;
@@ -19,6 +20,9 @@ void custom_printf(const char* format, ...) {
                     }
                     str++;
                 }
+            } else if (*format == '%') {
+                putchar('%'); // Print '%' when '%%' is encountered
+                format++;
             } else {
                 putchar('%'); // Print '%' if the specifier is not recognized
             }
@@ -36,4 +40,3 @@ int main() {
     custom_printf("Custom format: %S\n", text);
     return 0;
 }
-
