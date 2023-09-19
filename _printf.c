@@ -7,34 +7,45 @@ int _printf(const char *format, ...) {
 
     int count = 0; // To keep track of the number of characters printed
 
-    while (*format != '\0') {
+    while (*format) {
         if (*format != '%') {
             putchar(*format);
             count++;
         } else {
             format++; // Move past '%'
-            if (*format == 'c') {
-                // Handle character argument
-                char c = va_arg(args, int);
-                putchar(c);
-                count++;
-            } else if (*format == 's') {
-                // Handle string argument
-                const char *str = va_arg(args, const char *);
-                while (*str != '\0') {
-                    putchar(*str);
-                    str++;
+            switch (*format) {
+                case 'c':
+                    // Handle character argument
+                    {
+                        char c = va_arg(args, int);
+                        putchar(c);
+                        count++;
+                    }
+                    break;
+                case 's':
+                    // Handle string argument
+                    {
+                        const char *str = va_arg(args, const char *);
+                        while (*str) {
+                            putchar(*str);
+                            str++;
+                            count++;
+                        }
+                    }
+                    break;
+                case '%':
+                    // Handle '%' character
+                    putchar('%');
                     count++;
-                }
-            } else if (*format == '%') {
-                // Handle '%' character
-                putchar('%');
-                count++;
-            } else {
-                // Invalid format specifier, treat '%' followed by any other character as is
-                putchar('%');
-                putchar(*format);
-                count += 2;
+                    break;
+                default:
+                    // Invalid format specifier, treat '%' followed by any other character as is
+                    putchar('%');
+                    if (*format) {
+                        putchar(*format);
+                        count += 2;
+                    }
+                    break;
             }
         }
         format++;
@@ -48,8 +59,11 @@ int main(void) {
     int num = 42;
     char ch = 'A';
 
-    _printf("Hello, %s! The answer is %d%%.\n", "world", num);
-    _printf("A single character: %c\n", ch);
+    int printed_chars = _printf("Hello, %s! The answer is %d%%.\n", "world", num);
+    printf("\nTotal characters printed: %d\n", printed_chars);
+
+    printed_chars = _printf("A single character: %c\n", ch);
+    printf("\nTotal characters printed: %d\n", printed_chars);
 
     return 0;
 }
