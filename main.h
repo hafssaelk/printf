@@ -29,7 +29,6 @@ int print_hexadecimal_low(va_list);
 int print_pointer(va_list);
 int print_rev_string(va_list);
 int print_rot(va_list);
-int print_ex_string(va_list);
 
 int handler(const char *, va_list);
 int percent_handler(const char *str, va_list list, int *i);
