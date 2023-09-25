@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main() {
+int pointer() {
     int value = 42;
     int* ptr = &value;
 
