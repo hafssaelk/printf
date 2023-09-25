@@ -8,7 +8,7 @@
 int print_ex_string(va_list val)
 {
 	char *s;
-	int i, len = 0, count = 0;
+	int i, len = 0;
 	int cast;
 
 	if (s == NULL)
